@@ -53,5 +53,7 @@ spec:
           terraform apply -auto-approve
 
   output:
-    text:
-      - "GCP VM ${{ parameters.instanceName }} has been provisioned in project ${{ parameters.projectId }}."
+  text:
+    - title: GCP VM Created
+      content: "GCP VM ${{ parameters.instanceName }} has been provisioned in project ${{ parameters.projectId }}."
+
