@@ -2,6 +2,7 @@ apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: gcp-vm
+  namespace: default  # ✅ Required to avoid "Entity not found"
   title: Provision GCP VM
   description: Provisions a GCP VM using Terraform
   annotations:
