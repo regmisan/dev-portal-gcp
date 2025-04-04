@@ -2,14 +2,10 @@ apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: gcp-vm
-  namespace: default
   title: Provision GCP VM
   description: Provisions a GCP VM using Terraform
-  annotations:
-    backstage.io/managed-by-location: url:https://raw.githubusercontent.com/regmisan/dev-portal-gcp/main/templates/gcp-vm/template.yaml
-    backstage.io/managed-by-origin-location: url:https://raw.githubusercontent.com/regmisan/dev-portal-gcp/main/templates/gcp-vm/template.yaml
 spec:
-  owner: user:default/guest
+  owner: user:guest
   type: service
 
   parameters:
@@ -37,27 +33,26 @@ spec:
 
   steps:
     - id: fetch
-      name: Fetch Terraform Content
+      name: Fetch Terraform Template
       action: fetch:template
       input:
         url: https://github.com/regmisan/dev-portal-gcp/tree/main/templates/gcp-vm/content
-        targetPath: content
         values:
           projectId: ${{ parameters.projectId }}
           region: ${{ parameters.region }}
           zone: ${{ parameters.zone }}
           instanceName: ${{ parameters.instanceName }}
 
-    - id: terraformApply
-      name: Terraform Apply
-      action: shell:execute
+    - id: terraformInitApply
+      name: Run Terraform Init and Apply
+      action: run:script
       input:
-        workingDirectory: ./content
-        command: |
+        workingDirectory: ${{ steps.fetch.output.target }}
+        script: |
           terraform init
           terraform apply -auto-approve
 
   output:
     text:
       - title: GCP VM Created
-        content: "GCP VM **${{ parameters.instanceName }}** has been provisioned in project **${{ parameters.projectId }}**."
+        content: "GCP VM ${{ parameters.instanceName }} has been provisioned in project ${{ parameters.projectId }}."
