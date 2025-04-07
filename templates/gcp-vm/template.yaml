@@ -37,7 +37,7 @@ spec:
       action: fetch:template
       input:
         url: https://github.com/regmisan/dev-portal-gcp/tree/main/templates/gcp-vm
-        targetPath: ./content
+        targetPath: ./
         values:
           projectId: ${{ parameters.projectId }}
           region: ${{ parameters.region }}
