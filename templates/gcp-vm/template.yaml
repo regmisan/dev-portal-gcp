@@ -36,8 +36,8 @@ spec:
       name: Fetch Terraform Template
       action: fetch:template
       input:
-        url: https://github.com/regmisan/dev-portal-gcp/archive/refs/heads/main.tar.gz
-        templateFile: templates/gcp-vm/content
+        url: https://codeload.github.com/regmisan/dev-portal-gcp/tar.gz/main
+        subdir: dev-portal-gcp-main/templates/gcp-vm/content
         values:
           projectId: ${{ parameters.projectId }}
           region: ${{ parameters.region }}
@@ -57,4 +57,3 @@ spec:
     text:
       - title: GCP VM Created
         content: "GCP VM '${{ parameters.instanceName }}' has been provisioned in project '${{ parameters.projectId }}'."
-
