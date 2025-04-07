@@ -49,13 +49,14 @@ spec:
       action: shell:execute
       input:
         workingDirectory: ./content
-        command: |
-          terraform init
-          terraform apply -auto-approve \
-            -var="project_id=${{ parameters.projectId }}" \
-            -var="region=${{ parameters.region }}" \
-            -var="zone=${{ parameters.zone }}" \
-            -var="instance_name=${{ parameters.instanceName }}"
+        command: >
+          terraform init &&
+          terraform apply -auto-approve
+          -var="project_id=${{ parameters.projectId }}"
+          -var="region=${{ parameters.region }}"
+          -var="zone=${{ parameters.zone }}"
+          -var="instance_name=${{ parameters.instanceName }}"
+
   output:
     text:
       - title: GCP VM Created
