@@ -36,7 +36,7 @@ spec:
       name: Terraform Apply
       action: shell:execute
       input:
-        workingDirectory: ./terraform/dev-portal-gcp-main/templates/gcp-vm/content
+        workingDirectory: ./content
         command: |
           terraform init
           terraform apply -auto-approve
