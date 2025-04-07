@@ -32,25 +32,11 @@ spec:
           title: VM Instance Name
 
   steps:
-  - id: terraformInit
-    name: Terraform Init
-    action: shell:execute
-    input:
-      workingDirectory: ./terraform/dev-portal-gcp-main/templates/gcp-vm/content
-      command: terraform init
-
-  - id: terraformApply
-    name: Terraform Apply
-    action: shell:execute
-    input:
-      workingDirectory: ./terraform/dev-portal-gcp-main/templates/gcp-vm/content
-      command: terraform apply -auto-approve
-
     - id: terraformApply
       name: Terraform Apply
       action: shell:execute
       input:
-        workingDirectory: ./terraform
+        workingDirectory: ./terraform/dev-portal-gcp-main/templates/gcp-vm/content
         command: |
           terraform init
           terraform apply -auto-approve
