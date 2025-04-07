@@ -36,15 +36,19 @@ spec:
       name: Fetch Terraform Template
       action: fetch:template
       input:
-        url: https://codeload.github.com/regmisan/dev-portal-gcp/tar.gz/main
+        url: https://github.com/regmisan/dev-portal-gcp/tree/main/templates/gcp-vm/content
         targetPath: ./terraform
-        extract: true
+        values:
+          projectId: ${{ parameters.projectId }}
+          region: ${{ parameters.region }}
+          zone: ${{ parameters.zone }}
+          instanceName: ${{ parameters.instanceName }}
 
     - id: terraformApply
       name: Terraform Apply
       action: shell:execute
       input:
-        workingDirectory: ./terraform/dev-portal-gcp-main/templates/gcp-vm/content
+        workingDirectory: ./terraform
         command: |
           terraform init
           terraform apply -auto-approve
