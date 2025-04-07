@@ -34,7 +34,7 @@ spec:
   steps:
     - id: fetch
       name: Fetch Terraform Template
-      action: fetch:plain
+      action: fetch:template
       input:
         url: https://codeload.github.com/regmisan/dev-portal-gcp/tar.gz/main
         targetPath: ./terraform
