@@ -32,6 +32,18 @@ spec:
           title: VM Instance Name
 
   steps:
+    - id: fetch-template
+      name: Fetch Template
+      action: fetch:template
+      input:
+        url: https://github.com/regmisan/dev-portal-gcp/blob/main/templates/gcp-vm
+        targetPath: .
+        values:
+          projectId: ${{ parameters.projectId }}
+          region: ${{ parameters.region }}
+          zone: ${{ parameters.zone }}
+          instanceName: ${{ parameters.instanceName }}
+
     - id: terraformApply
       name: Terraform Apply
       action: shell:execute
